@@ -34,25 +34,27 @@ To use, simply include from_function_ptr.hpp in your project.
 
 Example
 -------
+```c++
+#include <iostream>
+#include "from_function_ptr.hpp"
 
-    #include <iostream>
-    
-    void do_nothing()
-    {
-        std::cout << "PROXY FUNCTION!";
-    }
+void do_nothing()
+{
+	std::cout << "PROXY FUNCTION!";
+}
 
-    int main()
-    {
-        // Convert from void(*)() to void(*)(int)
-        // For first set of templates:
-        //  Return type is void.
-        //  Function has no other parameters, so nothing else is included there.
-        // For second set of templates:
-        //  Convert function 'do_nothing'.
-        //  Add an extra 'int' parameter
-	    void (*some_function)(int) =
-            from_function_ptr<void>::with<do_nothing, int>::function;
-        some_function(4); // Valid
-        return 0;
-    }
+int main()
+{
+	// Convert from void(*)() to void(*)(int)
+	// For first set of templates:
+	//  Return type is void.
+	//  Function has no other parameters, so nothing else is included there.
+	// For second set of templates:
+	//  Convert function 'do_nothing'.
+	//  Add an extra 'int' parameter
+	void (*some_function)(int) =
+		from_function_ptr<void>::with<do_nothing, int>::function;
+	some_function(4); // Valid
+	return 0;
+}
+```
